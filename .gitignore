@@ -1,0 +1,13 @@
+# Ignore dependencies
+node_modules/
+
+# Ignore build output
+.next/
+dist/
+
+# Ignore environment variables
+.env
+.env.local
+
+# Ignore system files
+.DS_Store
