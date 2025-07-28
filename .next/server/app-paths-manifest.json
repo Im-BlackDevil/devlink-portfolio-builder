@@ -1,0 +1,12 @@
+{
+  "/auth/login/page": "app/auth/login/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/portfolio/[id]/page": "app/dashboard/portfolio/[id]/page.js",
+  "/api/ai/generate/route": "app/api/ai/generate/route.js",
+  "/api/portfolios/[id]/export/route": "app/api/portfolios/[id]/export/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/api/portfolios/[id]/route": "app/api/portfolios/[id]/route.js",
+  "/api/portfolios/[id]/publish/route": "app/api/portfolios/[id]/publish/route.js",
+  "/portfolio/[slug]/page": "app/portfolio/[slug]/page.js",
+  "/api/portfolios/public/[slug]/route": "app/api/portfolios/public/[slug]/route.js"
+}
