@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
-import { prisma } from '@/lib/prisma'
 
 // Disable static generation for this API route
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+export const preferredRegion = 'auto'
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,6 +24,18 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       )
     }
+
+    // Skip database access during build
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL) {
+      return NextResponse.json(
+        { message: 'Service temporarily unavailable' },
+        { status: 503 }
+      )
+    }
+
+    // Dynamic imports to avoid build-time issues
+    const { prisma } = await import('@/lib/prisma')
+    const bcrypt = await import('bcryptjs')
 
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({

@@ -5,6 +5,8 @@ import { prisma } from '@/lib/prisma'
 
 // Disable static generation for this API route
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
+export const preferredRegion = 'auto'
 
 export async function GET(
   request: NextRequest,
