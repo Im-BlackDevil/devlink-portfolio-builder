@@ -3,6 +3,9 @@ import { prisma } from '@/lib/prisma'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 
+// Disable static generation for this API route
+export const dynamic = 'force-dynamic'
+
 export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
