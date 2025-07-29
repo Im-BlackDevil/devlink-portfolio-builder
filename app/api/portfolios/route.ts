@@ -7,7 +7,7 @@ export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
 
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json(
         { message: 'Unauthorized' },
         { status: 401 }
@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
 
     const portfolios = await prisma.portfolio.findMany({
       where: {
-        userId: session.user.id
+        userId: session.user.email
       },
       orderBy: {
         updatedAt: 'desc'
@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
 
-    if (!session?.user?.id) {
+    if (!session?.user?.email) {
       return NextResponse.json(
         { message: 'Unauthorized' },
         { status: 401 }
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
         title,
         slug,
         template: template || 'modern',
-        userId: session.user.id,
+        userId: session.user.email,
       }
     })
 

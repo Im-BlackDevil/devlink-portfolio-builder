@@ -34,14 +34,14 @@ export default function PortfolioForm({ portfolio, onSave, isSaving }: Portfolio
   ]
 
   const handleChange = (field: string, value: any) => {
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
       [field]: value
     }))
   }
 
   const handleSectionChange = (section: string, field: string, value: any) => {
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
       [section]: {
         ...prev[section],
@@ -51,7 +51,7 @@ export default function PortfolioForm({ portfolio, onSave, isSaving }: Portfolio
   }
 
   const toggleSection = (sectionId: string) => {
-    setExpandedSections(prev => 
+    setExpandedSections((prev: string[]) => 
       prev.includes(sectionId) 
         ? prev.filter(id => id !== sectionId)
         : [...prev, sectionId]
@@ -59,21 +59,21 @@ export default function PortfolioForm({ portfolio, onSave, isSaving }: Portfolio
   }
 
   const addArrayItem = (section: string, template: any) => {
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
       [section]: [...(prev[section] || []), { ...template, id: Date.now() }]
     }))
   }
 
   const removeArrayItem = (section: string, index: number) => {
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
       [section]: prev[section].filter((_: any, i: number) => i !== index)
     }))
   }
 
   const updateArrayItem = (section: string, index: number, field: string, value: any) => {
-    setFormData(prev => ({
+    setFormData((prev: any) => ({
       ...prev,
       [section]: prev[section].map((item: any, i: number) => 
         i === index ? { ...item, [field]: value } : item

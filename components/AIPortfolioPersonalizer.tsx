@@ -35,13 +35,32 @@ interface AIPortfolioPersonalizerProps {
   onPersonalizationUpdate: (content: PersonalizedContent[]) => void;
 }
 
+interface ABTestVariant {
+  id: string;
+  variant: string;
+  performance: {
+    engagement: number;
+    conversion: number;
+  };
+  improvement: {
+    engagement: number;
+    conversion: number;
+  };
+}
+
+interface ABTestResults {
+  winner: ABTestVariant;
+  variants: ABTestVariant[];
+  confidence: number;
+}
+
 const AIPortfolioPersonalizer: React.FC<AIPortfolioPersonalizerProps> = ({ onPersonalizationUpdate }) => {
   const [isActive, setIsActive] = useState(false);
   const [currentVisitor, setCurrentVisitor] = useState<Visitor | null>(null);
   const [personalizedContent, setPersonalizedContent] = useState<PersonalizedContent[]>([]);
   const [analytics, setAnalytics] = useState<any>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [abTestResults, setAbTestResults] = useState<any>(null);
+  const [abTestResults, setAbTestResults] = useState<ABTestResults | null>(null);
   const sessionRef = useRef<NodeJS.Timeout | null>(null);
   const scrollDepthRef = useRef<number>(0);
 

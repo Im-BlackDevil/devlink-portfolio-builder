@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Zap, Target, TrendingUp, Users, BarChart3, Sparkles, Rocket } from 'lucide-react';
+import { Brain, Zap, Target, TrendingUp, Users, BarChart3, Sparkles, Rocket, PenTool } from 'lucide-react';
 import AISkillAnalyzer from '../../../components/AISkillAnalyzer';
 import AIInterviewSimulator from '../../../components/AIInterviewSimulator';
 import SkillVisualization3D from '../../../components/SkillVisualization3D';
@@ -15,6 +15,12 @@ interface Skill {
   proficiency: number;
   category: string;
   marketDemand: number;
+  learningPath: string[];
+  aiRecommendation: string;
+  x: number;
+  y: number;
+  z: number;
+  connections: string[];
 }
 
 interface Project {
@@ -37,14 +43,14 @@ const AIFeaturesDashboard: React.FC = () => {
 
   // Sample data for demonstration
   const sampleSkills: Skill[] = [
-    { id: '1', name: 'React', proficiency: 85, category: 'Frontend', marketDemand: 92 },
-    { id: '2', name: 'TypeScript', proficiency: 78, category: 'Frontend', marketDemand: 88 },
-    { id: '3', name: 'Node.js', proficiency: 82, category: 'Backend', marketDemand: 85 },
-    { id: '4', name: 'Python', proficiency: 70, category: 'Backend', marketDemand: 90 },
-    { id: '5', name: 'Docker', proficiency: 65, category: 'DevOps', marketDemand: 87 },
-    { id: '6', name: 'AWS', proficiency: 60, category: 'Cloud', marketDemand: 95 },
-    { id: '7', name: 'MongoDB', proficiency: 75, category: 'Database', marketDemand: 80 },
-    { id: '8', name: 'GraphQL', proficiency: 68, category: 'API', marketDemand: 82 }
+    { id: '1', name: 'React', proficiency: 85, category: 'Frontend', marketDemand: 92, learningPath: ['Advanced React Patterns', 'State Management', 'Performance Optimization'], aiRecommendation: 'Focus on advanced patterns and optimization techniques', x: 30, y: 40, z: 0, connections: ['2', '3'] },
+    { id: '2', name: 'TypeScript', proficiency: 78, category: 'Frontend', marketDemand: 88, learningPath: ['Advanced Types', 'Generic Programming', 'Type Safety'], aiRecommendation: 'Master advanced TypeScript features for better type safety', x: 70, y: 30, z: 0, connections: ['1', '3'] },
+    { id: '3', name: 'Node.js', proficiency: 82, category: 'Backend', marketDemand: 85, learningPath: ['Microservices', 'Performance Tuning', 'Security Best Practices'], aiRecommendation: 'Explore microservices architecture and security patterns', x: 50, y: 70, z: 0, connections: ['1', '2', '7'] },
+    { id: '4', name: 'Python', proficiency: 70, category: 'Backend', marketDemand: 90, learningPath: ['Data Science', 'Machine Learning', 'API Development'], aiRecommendation: 'Consider specializing in data science or ML applications', x: 80, y: 60, z: 0, connections: ['3', '7'] },
+    { id: '5', name: 'Docker', proficiency: 65, category: 'DevOps', marketDemand: 87, learningPath: ['Container Orchestration', 'Kubernetes', 'CI/CD Pipelines'], aiRecommendation: 'Learn Kubernetes and container orchestration', x: 20, y: 80, z: 0, connections: ['3', '6'] },
+    { id: '6', name: 'AWS', proficiency: 60, category: 'Cloud', marketDemand: 95, learningPath: ['Advanced AWS Services', 'Architecture Design', 'Cost Optimization'], aiRecommendation: 'Focus on advanced AWS services and architecture', x: 90, y: 20, z: 0, connections: ['5', '7'] },
+    { id: '7', name: 'MongoDB', proficiency: 75, category: 'Database', marketDemand: 80, learningPath: ['Database Design', 'Performance Tuning', 'Scalability'], aiRecommendation: 'Improve database design and optimization skills', x: 40, y: 90, z: 0, connections: ['3', '4', '6'] },
+    { id: '8', name: 'GraphQL', proficiency: 68, category: 'API', marketDemand: 82, learningPath: ['Schema Design', 'Performance Optimization', 'Security'], aiRecommendation: 'Master GraphQL schema design and optimization', x: 60, y: 50, z: 0, connections: ['1', '3'] }
   ];
 
   const sampleProjects: Project[] = [

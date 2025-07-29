@@ -10,11 +10,11 @@ export async function POST(
   try {
     const session = await getServerSession(authOptions)
 
-    if (!session?.user?.id) {
-      return NextResponse.json(
-        { message: 'Unauthorized' },
-        { status: 401 }
-      )
+    if (!session?.user?.email) {
+      return NextResponse.json({
+        message: 'Unauthorized',
+        status: 401
+      });
     }
 
     const portfolio = await prisma.portfolio.findUnique({
@@ -28,7 +28,7 @@ export async function POST(
       )
     }
 
-    if (portfolio.userId !== session.user.id) {
+    if (portfolio.userId !== session.user.email) {
       return NextResponse.json(
         { message: 'Unauthorized' },
         { status: 401 }

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { ArrowLeftIcon, SparklesIcon, PaletteIcon, BoltIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftIcon, SparklesIcon, SwatchIcon, BoltIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import TemplateSelector from '@/components/TemplateSelector';
 

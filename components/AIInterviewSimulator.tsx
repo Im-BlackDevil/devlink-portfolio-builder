@@ -4,6 +4,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Mic, MicOff, Send, Brain, Target, TrendingUp, CheckCircle, XCircle } from 'lucide-react';
 
+// TypeScript declarations for Web Speech API
+declare global {
+  interface Window {
+    SpeechRecognition: any;
+    webkitSpeechRecognition: any;
+  }
+}
+
 interface Question {
   id: string;
   question: string;
