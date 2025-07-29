@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import bcrypt from 'bcryptjs'
 
 // Disable static generation for this API route
 export const dynamic = 'force-dynamic'

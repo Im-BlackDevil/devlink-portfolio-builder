@@ -1,8 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Brain, Zap, Target, TrendingUp } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Brain, Target, TrendingUp } from 'lucide-react';
 
 interface Skill {
   id: string;
@@ -190,6 +190,7 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
             Interactive 3D visualization of your skills with AI-powered insights and market analysis
           </p>
         </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* 3D Visualization */}
           <div className="lg:col-span-2">
@@ -204,6 +205,7 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                   backgroundSize: '50px 50px'
                 }} />
               </div>
+
               {/* Skill nodes */}
               <div className="relative w-full h-full">
                 {positionedSkills.map((skill) => (
@@ -214,6 +216,7 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                     onClick={() => handleSkillSelect(skill)}
                   />
                 ))}
+                
                 {/* Skill connections */}
                 {positionedSkills.map((skill) =>
                   skill.connections.map((connectionId) => {
@@ -232,11 +235,13 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                 )}
               </div>
             </div>
+            
             <div className="mt-4 text-center text-sm text-purple-300">
               <p>💡 Click on skill nodes to see detailed insights</p>
               <p>🔄 Hover to see connections • Interactive 3D-like experience</p>
             </div>
           </div>
+
           {/* Skill Details Panel */}
           <div className="space-y-6">
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
@@ -244,6 +249,7 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                 <Target className="w-5 h-5" />
                 Skill Intelligence
               </h3>
+              
               {selectedSkill ? (
                 <div className="space-y-4">
                   <div>
@@ -263,6 +269,7 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                       </div>
                     </div>
                   </div>
+
                   <div>
                     <div className="flex justify-between mb-2">
                       <span className="text-sm">Market Demand:</span>
@@ -277,10 +284,12 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                       />
                     </div>
                   </div>
+
                   <div>
                     <span className="text-sm text-purple-200">Category:</span>
                     <p className="font-semibold">{selectedSkill.category}</p>
                   </div>
+
                   <div className="pt-4 border-t border-white/20">
                     <h5 className="font-semibold text-purple-200 mb-2">AI Insights:</h5>
                     <div className="space-y-2 text-sm">
@@ -306,6 +315,7 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                 </div>
               )}
             </div>
+
             {/* Network Statistics */}
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
               <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
@@ -335,13 +345,14 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                 </div>
               </div>
             </div>
+
             {/* Legend */}
             <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6">
               <h3 className="text-lg font-semibold mb-4">Legend</h3>
               <div className="space-y-3 text-sm">
                 <div className="flex items-center gap-3">
                   <div className="w-4 h-4 bg-green-500 rounded-full"></div>
-                  <span>High Market Demand (&gt;80%)</span>
+                  <span>High Market Demand ({'>'}80%)</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-4 h-4 bg-yellow-500 rounded-full"></div>
@@ -349,7 +360,7 @@ const SkillVisualization3D: React.FC<SkillVisualization3DProps> = ({ skills, onS
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-4 h-4 bg-red-500 rounded-full"></div>
-                  <span>Low Market Demand (&lt;60%)</span>
+                  <span>Low Market Demand ({'<' }60%)</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <div className="w-4 h-4 bg-blue-500 rounded-full"></div>
