@@ -7,6 +7,10 @@ export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 export const preferredRegion = 'auto'
 
+// Prevent any static generation attempts
+export const revalidate = 0
+export const fetchCache = 'force-no-store'
+
 export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }

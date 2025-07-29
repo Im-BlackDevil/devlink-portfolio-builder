@@ -1,18 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { prisma } from '@/lib/prisma'
 
 // Disable static generation for this API route
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
 export const preferredRegion = 'auto'
 
+// Prevent any static generation attempts
+export const revalidate = 0
+export const fetchCache = 'force-no-store'
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
   try {
+    // Skip during build time
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL) {
+      return NextResponse.json(
+        { message: 'Service temporarily unavailable' },
+        { status: 503 }
+      )
+    }
+
     const session = await getServerSession(authOptions)
 
     if (!session?.user?.email) {
@@ -21,6 +32,9 @@ export async function GET(
         { status: 401 }
       )
     }
+
+    // Dynamic import to avoid build-time issues
+    const { prisma } = await import('@/lib/prisma')
 
     const portfolio = await prisma.portfolio.findFirst({
       where: {
@@ -59,6 +73,14 @@ export async function PUT(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Skip during build time
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL) {
+      return NextResponse.json(
+        { message: 'Service temporarily unavailable' },
+        { status: 503 }
+      )
+    }
+
     const session = await getServerSession(authOptions)
 
     if (!session?.user?.email) {
@@ -67,6 +89,9 @@ export async function PUT(
         { status: 401 }
       )
     }
+
+    // Dynamic import to avoid build-time issues
+    const { prisma } = await import('@/lib/prisma')
 
     const portfolio = await prisma.portfolio.findFirst({
       where: {
@@ -230,6 +255,14 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
+    // Skip during build time
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL) {
+      return NextResponse.json(
+        { message: 'Service temporarily unavailable' },
+        { status: 503 }
+      )
+    }
+
     const session = await getServerSession(authOptions)
 
     if (!session?.user?.email) {
@@ -238,6 +271,9 @@ export async function DELETE(
         { status: 401 }
       )
     }
+
+    // Dynamic import to avoid build-time issues
+    const { prisma } = await import('@/lib/prisma')
 
     const portfolio = await prisma.portfolio.findFirst({
       where: {

@@ -88,4 +88,8 @@ export { handler as GET, handler as POST }
 // Force dynamic rendering for Vercel deployment
 export const dynamic = 'force-dynamic'
 export const runtime = 'nodejs'
-export const preferredRegion = 'auto' 
+export const preferredRegion = 'auto'
+
+// Prevent any static generation attempts
+export const revalidate = 0
+export const fetchCache = 'force-no-store' 
