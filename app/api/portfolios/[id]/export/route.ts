@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/lib/prisma'
 import jsPDF from 'jspdf'
 import html2canvas from 'html2canvas'
 
@@ -14,6 +13,17 @@ export async function POST(
 ) {
   try {
     const { format } = await request.json()
+
+    // Skip database access during build
+    if (process.env.NODE_ENV === 'production' && !process.env.VERCEL_URL) {
+      return NextResponse.json(
+        { message: 'Service temporarily unavailable' },
+        { status: 503 }
+      )
+    }
+
+    // Dynamic import to avoid build-time issues
+    const { prisma } = await import('@/lib/prisma')
 
     // Fetch portfolio data with all related content
     const portfolio = await prisma.portfolio.findUnique({
